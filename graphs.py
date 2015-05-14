@@ -13,17 +13,20 @@ class Vertex:
     def getKey(self):
         return self.id
 
+    def __iter__(self):
+        return iter(self.connections.values())
+
 
 class Graph:
     def __init__(self):
         self.vertices ={}
         self.numVertices = 0
 
-    def addVertex(self, key):
+    def addNode(self, key):
         self.numVertices += 1
-        newVert = Vertex(key)
-        self.vertices[key] = newVert
-        return newVert
+        node = Vertex(key)
+        self.vertices[key] = node
+        return node
 
     def addEdge(self, f, t):
         if f not in self.vertices:
@@ -31,6 +34,9 @@ class Graph:
         if t not in self.vertices:
             nv = self.addVertex(t)
         self.vertices[f].setConnection(self.vertices[t])
+
+    def getEdges(self):
+        return self.vertices.keys()
 
     def __iter__(self):
         return iter(self.vertices.values())

@@ -28,10 +28,21 @@ class Node(Base):
 class Edge(Base):
     __tablename__ = 'edge'
 
-    node1 = Column(Integer, ForeignKey('node.node_id'), primary_key=True)
-    node2 = Column(Integer, ForeignKey('node.node_id'), primary_key=True)
+    lower_id = Column(Integer,
+                        ForeignKey('node.node_id'),
+                        primary_key=True)
 
-    # here we have lower.node_id <= higher.node_id
+    higher_id = Column(Integer,
+                        ForeignKey('node.node_id'),
+                        primary_key=True)
+
+    lower_node = relationship(Node,
+                                primaryjoin=lower_id==Node.node_id,
+                                backref='lower_edges')
+    higher_node = relationship(Node,
+                                primaryjoin=higher_id==Node.node_id,
+                                backref='higher_edges')
+
     def __init__(self, n1, n2):
         if n1.node_id < n2.node_id:
             self.lower_node = n1
