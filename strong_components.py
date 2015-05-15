@@ -1,4 +1,3 @@
-@profile
 def strongly_connected_components_iterative(vertices, edges):
     """
     This is a non-recursive version of strongly_connected_components_path.

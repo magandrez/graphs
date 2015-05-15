@@ -84,6 +84,7 @@ def strong_calculation(vertices,edges):
     with decorator @profile in main.py
 
     """
+    print("=== Calculating strongly connected components")
     print(list(strongly_connected_components_iterative(vertices, edges)))
 
 if __name__ == '__main__':
