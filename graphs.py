@@ -30,9 +30,9 @@ class Graph:
 
     def addEdge(self, f, t):
         if f not in self.vertices:
-            nv = self.addVertex(f)
+            nv = self.addNode(f)
         if t not in self.vertices:
-            nv = self.addVertex(t)
+            nv = self.addNode(t)
         self.vertices[f].setConnection(self.vertices[t])
 
     def getEdges(self):
