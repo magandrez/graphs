@@ -35,8 +35,8 @@ class Graph:
             nv = self.addNode(t)
         self.vertices[f].setConnection(self.vertices[t])
 
-    def getEdges(self):
+    def getNodes(self):
         return self.vertices.keys()
 
-    def __iter__(self):
+    def getEdges(self):
         return iter(self.vertices.values())

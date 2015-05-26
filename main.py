@@ -19,8 +19,6 @@ def generate_graph():
     # of edges is < the number of nodes, all edges are pseudo-randomly created.
     The range of the random function to generate nodes for the edges relies on the
     number of nodes previously inserted by the user, making the process less random.
-
-    The
     """
     g = Graph()
     print("=== Pseudo-random graph generator ===")
@@ -39,7 +37,7 @@ def generate_graph():
         node2 = random.randrange(len(keys))
         g.addEdge(node1, node2)
     print("Below, the list of all generated nodes (a,b):")
-    for vert in g:
+    for vert in g.getEdges():
         #print the node ID
         print(vert.getKey())
         for e in vert.getConnections():
@@ -54,7 +52,6 @@ def save_toDB(graph):
     This function receives as a parameter a previously generated graph and
     saves its nodes into a sqllite database created in memory (for performance) using
     SQLAlchemy ORM toolkit imported above.
-
     """
     print("=== Saving generated graph to DB (SQLite) ===")
     #defining engine and debug mode
@@ -62,12 +59,12 @@ def save_toDB(graph):
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    for vert in graph:
+    for vert in graph.getEdges():
         node = Node(vert.getKey())
         session.add(node)
+        #node.add_neighbors(vert)
         #TO-DO
         #Find a way to retrieve and create edges in the database
-        #session.add(node.add_neighbors(vert.getConnections()))
 
     session.commit()
 
@@ -82,7 +79,6 @@ def strong_calculation(vertices,edges):
 
     Used a function in main to be able to profile using line_profiler package
     with decorator @profile in main.py
-
     """
     print("=== Calculating strongly connected components")
     print(list(strongly_connected_components_iterative(vertices, edges)))
@@ -95,4 +91,4 @@ if __name__ == '__main__':
     #TO-DO
     #Fix algorithm. At the moment returns all nodes
     #as strongly connected components
-    strong_calculation(graph.getEdges(), graph)
+    strong_calculation(graph.getNodes(), graph)
