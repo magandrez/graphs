@@ -2,3 +2,4 @@ __pycache__/
 # Virtual env
 graphs/
 main.py.lprof
+.DS_Store
