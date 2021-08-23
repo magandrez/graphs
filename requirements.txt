@@ -1,2 +1,2 @@
-SQLAlchemy==1.4.22
+SQLAlchemy==1.4.23
 line-profiler==3.3.0
